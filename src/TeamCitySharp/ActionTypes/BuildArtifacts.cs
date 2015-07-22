@@ -18,9 +18,9 @@ namespace TeamCitySharp.ActionTypes
             _caller = caller;
         }
 
-        public void DownloadArtifactsByBuildId(string buildId, Action<string> downloadHandler)
+        public void DownloadArtifactsByBuildId(string buildId, string destination)
         {
-            _caller.GetDownloadFormat(downloadHandler, "/downloadArtifacts.html?buildId={0}", buildId);
+            _caller.GetDownloadFormat(destination, "/downloadArtifacts.html?buildId={0}", buildId);
         }
 
         public ArtifactWrapper ByBuildConfigId(string buildConfigId)
@@ -152,7 +152,7 @@ namespace TeamCitySharp.ActionTypes
                     if (overwrite) File.Delete(destination);
                     else continue;
                 }
-                _caller.GetDownloadFormat(tempfile => File.Move(tempfile, destination), url);
+                _caller.GetDownloadFormat(destination, url, directory);
             }
             return downloaded;
         }

@@ -153,9 +153,9 @@ namespace TeamCitySharp.ActionTypes
             _caller.PutFormat(sw.ToString(), HttpContentTypes.ApplicationXml, "/app/rest/buildTypes/{0}/parameters", locator);
         }
 
-        public void DownloadConfiguration(BuildTypeLocator locator, Action<string> downloadHandler)
+        public void DownloadConfiguration(BuildTypeLocator locator, string destination)
         {
-            _caller.GetDownloadFormat(downloadHandler, "/app/rest/buildTypes/{0}", locator);
+            _caller.GetDownloadFormat(destination, "/app/rest/buildTypes/{0}", locator);
         }
 
         public void PostRawAgentRequirement(BuildTypeLocator locator, string rawXml)

@@ -19,7 +19,7 @@
 
         void DeleteFormat(string urlPart, params object[] parts);
 
-        void GetDownloadFormat(Action<string> downloadHandler, string urlPart, params object[] parts);
+        void GetDownloadFormat(string destination, string urlPart, params object[] parts);
 
         string StartBackup(string urlPart);
 

@@ -87,6 +87,6 @@ namespace TeamCitySharp.ActionTypes
         /// <since>8.0</since>
         void PutAllBuildTypeParameters(BuildTypeLocator locator, IDictionary<string, string> parameters);
 
-        void DownloadConfiguration(BuildTypeLocator locator, Action<string> downloadHandler);
+        void DownloadConfiguration(BuildTypeLocator locator, string destination);
     }
 }

@@ -60,7 +60,7 @@ namespace TeamCitySharp.Connection
             Delete(string.Format(urlPart, parts));
         }
 
-        public void GetDownloadFormat(Action<string> downloadHandler, string urlPart, params object[] parts)
+        public void GetDownloadFormat(string destination, string urlPart, params object[] parts)
         {
             if (CheckForUserNameAndPassword())
             {
@@ -73,27 +73,12 @@ namespace TeamCitySharp.Connection
                 throw new ArgumentException("Url must be specfied");
             }
 
-            if (downloadHandler == null)
-            {
-                throw new ArgumentException("A download handler must be specfied.");
-            }
-
-            string tempFileName = Path.GetRandomFileName();
             var url = CreateUrl(string.Format(urlPart, parts));
 
-            try
-            {
-                CreateHttpClient(_configuration.UserName, _configuration.Password, HttpContentTypes.ApplicationJson).GetAsFile(url, tempFileName);
-                downloadHandler.Invoke(tempFileName);
+            
+                CreateHttpClient(_configuration.UserName, _configuration.Password, HttpContentTypes.ApplicationJson)
+                    .GetAsFile(url, destination);
 
-            }
-            finally
-            {
-                if (File.Exists(tempFileName))
-                {
-                    File.Delete(tempFileName);
-                }
-            }
         }
 
         public string StartBackup(string urlPart)
